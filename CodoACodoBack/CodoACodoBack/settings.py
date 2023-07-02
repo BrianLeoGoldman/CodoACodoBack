@@ -74,11 +74,24 @@ WSGI_APPLICATION = 'CodoACodoBack.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
+""" 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
     }
+} 
+"""
+
+DATABASES = { 
+    'default': { 
+        'ENGINE': 'django.db.backends.postgresql_psycopg2', 
+        'NAME': 'codo-a-codo', 
+        'USER': os.environ.get('POSTGRESQL_USER', ''), 
+        'PASSWORD': os.environ.get('POSTGRESQL_PASSWORD', ''), 
+        'HOST': '127.0.0.1', 
+        'PORT': os.environ.get('POSTGRESQL_PORT', ''), 
+    } 
 }
 
 
