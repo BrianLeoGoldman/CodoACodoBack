@@ -1,6 +1,8 @@
 from django.http import HttpResponse
 import datetime
 from django.template import Template, Context
+from django.template import loader
+from django.shortcuts import render
 
 def saludo(request):
     return HttpResponse("Hola, esta es la View saludo!")
@@ -51,3 +53,17 @@ def template_lista(request):
     ctx=Context({"temas_curso":temas}) 
     documento=plt.render(ctx) 
     return HttpResponse(documento)
+
+def template_with_loader(request):
+    nombre="Juan" 
+    apellido= "Gonzalez" 
+    fecha = datetime.datetime.now() 
+    return render(
+        request, 
+        "plantilla_dinamica.html", 
+        {"nombre_persona":nombre,"apellido_persona":apellido,"now":fecha}
+    )
+
+def herencia_template(request):
+    fecha = datetime.datetime.now()
+    return render(request, "hijo.html", {"now": fecha})

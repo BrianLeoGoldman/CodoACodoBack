@@ -1,5 +1,6 @@
 <html> 
-    <body> 
+    <body>
+        {% include 'barra.html' %} 
         <h1>Hola desde la plantilla dinamica!</h1> 
         <p>Nombre: {{nombre_persona.upper}} {{apellido_persona.lower}}</p> 
         <p>Fecha: hoy es el dia {{now.day}} del mes {{now.month}} del anio {{now.year}}</p> 

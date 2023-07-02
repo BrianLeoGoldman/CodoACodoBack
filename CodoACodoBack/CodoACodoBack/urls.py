@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from CodoACodoBack.views import saludo, saludo_html, despedida, get_fecha, calcular_edad, template, template_dinamico, template_lista
+from CodoACodoBack.views import saludo, saludo_html, despedida, get_fecha, calcular_edad, template, template_dinamico, template_lista, template_with_loader, herencia_template
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -26,5 +26,7 @@ urlpatterns = [
     path("edades/<int:edad>/<int:anio>", calcular_edad),
     path("template/", template),
     path("templatedinamico/", template_dinamico),
-    path("templatelista/", template_lista)
+    path("templatelista/", template_lista),
+    path("templateloader/", template_with_loader),
+    path("herencia/", herencia_template)
 ]
