@@ -1,0 +1,12 @@
+<html> 
+    <body> 
+        <h1>Hola desde la plantilla dinamica!</h1> 
+        <p>Nombre: {{nombre_persona.upper}} {{apellido_persona.lower}}</p> 
+        <p>Fecha: hoy es el dia {{now.day}} del mes {{now.month}} del anio {{now.year}}</p> 
+        {% if nombre_persona == "Juan" %} 
+            <p>Te llamas Juan</p> 
+        {% else %} 
+            <p>No te llamas Juan</p>
+        {% endif %}
+    </body> 
+</html>

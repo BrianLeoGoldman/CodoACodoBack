@@ -1,0 +1,19 @@
+<html> 
+    <body> 
+        <ul> 
+            {% if temas_curso %} 
+                {% for tema in temas_curso %} 
+                    {# Esto es un comentartio de una linea }
+                    <li>{{tema}} empieza con {{tema|first|lower}}</li>
+                    {% comment %}
+                        En la linea 6 usamos los filtros 
+                        first (toma solo la primera letra) 
+                        y lower (pasa a minusculas)
+                    {% endcomment %}
+                {% endfor %} 
+            {% else %} 
+                <p>No hay temas que mostrar</p> 
+            {% endif %} 
+        </ul> 
+    </body> 
+</html>
