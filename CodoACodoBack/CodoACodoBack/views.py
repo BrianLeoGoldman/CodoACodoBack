@@ -3,6 +3,7 @@ import datetime
 from django.template import Template, Context
 from django.template import loader
 from django.shortcuts import render
+from gestionPedidos.forms import FormularioContacto
 
 def saludo(request):
     return HttpResponse("Hola, esta es la View saludo!")
@@ -67,3 +68,26 @@ def template_with_loader(request):
 def herencia_template(request):
     fecha = datetime.datetime.now()
     return render(request, "hijo.html", {"now": fecha})
+
+def busqueda_productos(request): 
+    return render(request,"busqueda_productos.html") 
+
+def buscar(request): 
+    if request.GET["prd"]: 
+        producto=request.GET["prd"] 
+        articulos=articulos.objects.filter(nombre__icontains=producto) 
+        return render(request,"resultados_busqueda.html",{"articulos":articulos,"query":producto}) 
+    else: 
+        mensaje="No has introducido ningún dato" 
+        return HttpResponse(mensaje)
+    
+def contacto(request): 
+    if request.method=="POST": 
+        miFormulario=FormularioContacto(request.POST) 
+        if miFormulario.is_valid(): 
+            infForm=miFormulario.cleaned_data 
+            #Realizar operación con los datos aquí e incluir gracias.html 
+            return render(request,"gracias.html") 
+    else: 
+        miFormulario=FormularioContacto() 
+    return render(request,"formulario_contacto.html",{"form":miFormulario})
