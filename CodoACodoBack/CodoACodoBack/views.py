@@ -10,9 +10,17 @@ def home(request):
     return render(request,"home.html") 
 
 def saludo(request):
-    response = HttpResponse("¡Hola desde la API!")
-    response["Access-Control-Allow-Origin"] = "*"
-    response["Access-Control-Allow-Methods"] = "GET"
+    response = HttpResponse("Hola a todos!")
+    return response
+
+def login(request):
+    print("REQUEST!!!!!!!!!!!!!!!")
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        contrasena = request.POST.get('contrasena')
+    response = HttpResponse("El metodo login se ejecuto!")
+    #response["Access-Control-Allow-Origin"] = "*"
+    #response["Access-Control-Allow-Methods"] = "POST"
     return response
 
 def saludo_html(request):
