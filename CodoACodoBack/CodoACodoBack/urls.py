@@ -15,10 +15,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from CodoACodoBack.views import saludo, saludo_html, despedida, get_fecha, calcular_edad, template, template_dinamico, template_lista, template_with_loader, herencia_template, buscar, busqueda_productos
+from CodoACodoBack.views import home, saludo, saludo_html, despedida, get_fecha, calcular_edad, template, template_dinamico, template_lista, template_with_loader, herencia_template, buscar, busqueda_productos, contacto
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path("", home),
     path("saludo/", saludo),
     path("saludohtml/", saludo_html),
     path("despedida/", despedida),
@@ -31,4 +32,5 @@ urlpatterns = [
     path("herencia/", herencia_template),
     path('busqueda_productos/', busqueda_productos), 
     path('buscar/', buscar),
+    path('contacto/', contacto)
 ]

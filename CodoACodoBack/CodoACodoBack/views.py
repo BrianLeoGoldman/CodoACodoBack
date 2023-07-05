@@ -4,9 +4,16 @@ from django.template import Template, Context
 from django.template import loader
 from django.shortcuts import render
 from gestionPedidos.forms import FormularioContacto
+from gestionPedidos.models import Articulo
+
+def home(request):
+    return render(request,"home.html") 
 
 def saludo(request):
-    return HttpResponse("Hola, esta es la View saludo!")
+    response = HttpResponse("¡Hola desde la API!")
+    response["Access-Control-Allow-Origin"] = "*"
+    response["Access-Control-Allow-Methods"] = "GET"
+    return response
 
 def saludo_html(request):
     documento="""<html><body><h1>Hola a todos! Esta es la View saludo_html</h1></body></html>"""
@@ -75,11 +82,15 @@ def busqueda_productos(request):
 def buscar(request): 
     if request.GET["prd"]: 
         producto=request.GET["prd"] 
-        articulos=articulos.objects.filter(nombre__icontains=producto) 
+        if len(producto)>20: 
+            mensaje="Texto de búsqueda demasiado largo" 
+        else: 
+            articulos=Articulo.objects.filter(nombre__icontains=producto) 
         return render(request,"resultados_busqueda.html",{"articulos":articulos,"query":producto}) 
-    else: 
+    else:
         mensaje="No has introducido ningún dato" 
         return HttpResponse(mensaje)
+
     
 def contacto(request): 
     if request.method=="POST": 
@@ -87,7 +98,7 @@ def contacto(request):
         if miFormulario.is_valid(): 
             infForm=miFormulario.cleaned_data 
             #Realizar operación con los datos aquí e incluir gracias.html 
-            return render(request,"gracias.html") 
+            return render(request,"gracias.html", {"respuestasFormulario":infForm}) 
     else: 
         miFormulario=FormularioContacto() 
     return render(request,"formulario_contacto.html",{"form":miFormulario})
