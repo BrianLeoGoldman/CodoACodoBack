@@ -1,5 +1,5 @@
 from django.contrib import admin
-from gestionPedidos.models import Cliente, Articulo, Pedido
+from prueba.models import Cliente, Articulo, Pedido
 
 class ClienteAdmin(admin.ModelAdmin):
     list_display=("nombre", "direccion", "telefono",)
