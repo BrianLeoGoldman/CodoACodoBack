@@ -1,8 +1,8 @@
 from django.contrib import admin
-from marylu.models import Usuario
+from marylu.models import User
 
-class UsuarioAdmin(admin.ModelAdmin):
+class UserAdmin(admin.ModelAdmin):
     list_display=("username", "email",)
     list_filter=("username",)
 
-admin.site.register(Usuario, UsuarioAdmin)
+admin.site.register(User, UserAdmin)
