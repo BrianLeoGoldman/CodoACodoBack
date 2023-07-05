@@ -9,8 +9,11 @@ def login(request):
         username = request.POST.get('username')
         contrasena = request.POST.get('contrasena')
         usuario=Usuario.objects.filter(username__exact=username, contrasena__exact=contrasena) 
-        print(usuario)
-    response = HttpResponse("El metodo login se ejecuto!")
-    #response["Access-Control-Allow-Origin"] = "*"
-    #response["Access-Control-Allow-Methods"] = "POST"
-    return response
+        if usuario.exists():
+            # Usuario encontrado en la base de datos
+            return HttpResponse('Inicio de sesión exitoso')
+        else:
+            # Usuario no encontrado en la base de datos
+            return HttpResponse('Nombre de usuario o contraseña incorrectos')
+    else:
+        return HttpResponse('Método no permitido')
