@@ -1,15 +1,9 @@
 from django.http import HttpResponse
 from django.core.exceptions import ValidationError
 from django.contrib.auth.hashers import make_password, check_password
-from django.template import Template, Context
-from django.template import loader
 from django.shortcuts import render
 from marylu.models import User
-from django.contrib.auth.tokens import default_token_generator
-from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
-from django.utils.encoding import force_bytes
-from django.core.mail import send_mail
-from django.conf import settings
+import requests
 
 def login(request):
     if request.method == 'POST':
@@ -46,3 +40,36 @@ def register(request):
     else:
         return HttpResponse('Method not allowed')
     
+def forgot(request):
+    if request.method == 'POST':
+        to_email = request.POST.get('email')
+        try:
+            url = "https://api.mailgun.net/v3/sandboxc3caf8202424427689614c22199faae7.mailgun.org/messages"
+            api_key = "ae978e4c9ff0bee2eb6e0421e70e2596-6d8d428c-1a2a4a25"
+            from_email = "Mailgun Sandbox <postmaster@sandboxc3caf8202424427689614c22199faae7.mailgun.org>"
+            subject = "Marylu password recovery"
+            html_content = """
+            <html>
+                <body>
+                    <h1>This is an automatic email from the Marylu app to recover your password</h1>
+                    <p>Currently, we cannot give you a link to recover your password...</p>
+                    <p>Try to remember it or create a new account. Thanks!</p>
+                </body>
+            </html>
+            """
+            data = {
+                "from": from_email,
+                "to": to_email,
+                "subject": subject,
+                "html": html_content
+            }
+            response = requests.post(url, auth=("api", api_key), data=data)
+            if response.status_code == 200:
+                return HttpResponse("Email delivery successful")
+            else:
+                return HttpResponse("Error on email delivery:", response.text)
+        except ConnectionRefusedError:
+            print("Conection was refused")
+            return HttpResponse("Conection was refused")
+    else:
+        return HttpResponse('Method not allowed')
