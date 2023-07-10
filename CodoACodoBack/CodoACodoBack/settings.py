@@ -147,3 +147,19 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CORS_ORIGIN_WHITELIST = ['http://127.0.0.1:5500']
 # TODO: cambiar el localhost por la url una vez hecho el deployment
 CORS_ALLOW_METHODS = ['GET', 'POST']
+
+# Configuración del servidor de correo saliente (SMTP)
+""" 
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'  # Reemplaza con la dirección del servidor SMTP
+EMAIL_PORT = 587  # Reemplaza con el puerto del servidor SMTP
+EMAIL_USE_TLS = True  # Usar TLS para cifrar la conexión (recomendado)
+EMAIL_HOST_USER = 'coderbebop@gmail.com'  # Reemplaza con tu dirección de correo electrónico
+EMAIL_HOST_PASSWORD = 'heladito'  # Reemplaza con tu contraseña de correo electrónico
+"""
+
+# Configuración adicional (opcional)
+""" 
+EMAIL_SUBJECT_PREFIX = '[Marylu]'  # Prefijo opcional para los asuntos de los correos electrónicos
+DEFAULT_FROM_EMAIL = 'coderbebop@gmail.com'  # Dirección de correo electrónico predeterminada para los correos salientes 
+"""
