@@ -45,7 +45,7 @@ def forgot(request):
         to_email = request.POST.get('email')
         try:
             url = "https://api.mailgun.net/v3/sandboxc3caf8202424427689614c22199faae7.mailgun.org/messages"
-            api_key = "ae978e4c9ff0bee2eb6e0421e70e2596-6d8d428c-1a2a4a25"
+            api_key = "key-f5835c7389415a57be238545bce133d2"
             from_email = "Mailgun Sandbox <postmaster@sandboxc3caf8202424427689614c22199faae7.mailgun.org>"
             subject = "Marylu password recovery"
             html_content = """
